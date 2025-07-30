@@ -3,9 +3,10 @@ use std::{env::args, fmt::Debug, pin::Pin};
 use anyhow::{Context, Result};
 use clap::Parser;
 use iroh::{
-    Endpoint, NodeAddr, PublicKey,
+    Endpoint, NodeAddr, PublicKey, SecretKey, Watcher,
     endpoint::{RecvStream, SendStream},
 };
+use iroh_base::ticket::NodeTicket;
 use nix_daemon::{
     Store,
     nix::{DaemonProtocolAdapter, DaemonStore},
@@ -25,7 +26,7 @@ struct Args {
 #[derive(Debug, Clone, clap::Subcommand)]
 enum Mode {
     Server,
-    Client { server_address: String },
+    Client { server_address: NodeTicket },
 }
 
 #[tokio::main]
@@ -46,7 +47,7 @@ async fn main() -> Result<()> {
             stream.bind("./proxy.sock")?;
             let listener = stream.listen(128)?;
 
-            let client = connect_to_remote(NodeAddr::new(server_address.parse()?)).await?;
+            let client = connect_to_remote(server_address.node_addr().clone()).await?;
 
             let mut proxy = Sending::new(client);
             let (mut socket, _) = listener.accept().await?;
@@ -113,7 +114,13 @@ where
 async fn connect_to_remote(
     addr: NodeAddr,
 ) -> Result<DaemonStore<DuplexP2PStream<RecvStream, SendStream>>> {
-    let ep = Endpoint::builder().bind().await?;
+    let ep = Endpoint::builder()
+        // .secret_key(SecretKey::from_bytes(&[
+        //     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+        //     1, 1, 1,
+        // ]))
+        .bind()
+        .await?;
     let conn = ep.connect(addr, b"my-alpn").await?;
     let (tx, rx) = conn.open_bi().await.context("unable to open uni")?;
     let stream = DuplexP2PStream::new(rx, tx);
@@ -127,10 +134,24 @@ async fn connect_to_remote(
 }
 
 async fn serve_to_remote() -> Result<DuplexP2PStream<RecvStream, SendStream>> {
-    let ep = Endpoint::builder().bind().await?;
-    let addr = ep.node_id();
+    let ep = Endpoint::builder()
+        .alpns(["my-alpn".into()].to_vec())
+        .relay_mode(iroh::RelayMode::Default)
+        .secret_key(SecretKey::from_bytes(&[
+            1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+            1, 1, 1,
+        ]))
+        .bind()
+        .await?;
+    ep.home_relay().initialized().await?;
 
-    println!("address is {addr}");
+    let node = ep.node_addr().initialized().await?;
+    let mut short = node.clone();
+    let ticket = NodeTicket::new(node);
+    // short.direct_addresses.clear();
+    // let short = NodeTicket::new(short);
+
+    println!("address is {ticket}");
 
     let conn = ep.accept().await.context("unable to open uni")?.await?;
 
