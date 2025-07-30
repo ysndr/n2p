@@ -1,0 +1,11 @@
+[package]
+name = "n2p"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+clap = { version = "4", features = ["derive"] }
+iroh = { version = "0.90" }
+nix-daemon = "0.1"
+tokio = "1"
+anyhow = "1"
