@@ -1554,6 +1554,7 @@ dependencies = [
  "ed25519-dalek",
  "n0-snafu",
  "nested_enum_utils",
+ "postcard",
  "rand_core 0.6.4",
  "serde",
  "snafu",
@@ -1890,6 +1891,7 @@ dependencies = [
  "anyhow",
  "clap",
  "iroh",
+ "iroh-base",
  "nix-daemon",
  "tokio",
 ]
