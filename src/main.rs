@@ -16,36 +16,47 @@ use tokio::{
 };
 
 #[derive(Debug, clap::Parser)]
+#[command(version, about, long_about = None)]
 struct Args {
-    server: bool,
+    #[command(subcommand)]
+    mode: Mode,
+}
+
+#[derive(Debug, Clone, clap::Subcommand)]
+enum Mode {
+    Server,
+    Client { server_address: String },
 }
 
 #[tokio::main]
 async fn main() -> Result<()> {
     let args = Args::parse();
-    if args.server {
-        let local = connect_to_local_daemon().await?;
-        let mut local = Receiving::new(local);
+    match args.mode {
+        Mode::Server => {
+            let local = connect_to_local_daemon().await?;
+            let mut local = Receiving::new(local);
 
-        let server = serve_to_remote().await?;
+            let server = serve_to_remote().await?;
 
-        let mut proxy = local.into_daemon_store_adapter(server).await?;
-        proxy.run().await?
-    } else {
-        let stream = tokio::net::UnixSocket::new_stream()?;
-        stream.bind("./proxy.sock");
-        let listener = stream.listen(128)?;
+            let mut proxy = local.into_daemon_store_adapter(server).await?;
+            proxy.run().await?
+        }
+        Mode::Client { server_address } => {
+            let stream = tokio::net::UnixSocket::new_stream()?;
+            stream.bind("./proxy.sock")?;
+            let listener = stream.listen(128)?;
 
-        let client = connect_to_remote(todo!()).await?;
+            let client = connect_to_remote(NodeAddr::new(server_address.parse()?)).await?;
 
-        let proxy = Sending::new(client);
-        let (socket, _) = listener.accept().await?;
-        let (rx, tx) = socket.split();
-        let mut proxy = proxy
-            .into_daemon_store_adapter(DuplexP2PStream(rx, tx))
-            .await?;
-        proxy.run().await?;
-    }
+            let mut proxy = Sending::new(client);
+            let (mut socket, _) = listener.accept().await?;
+            let (rx, tx) = socket.split();
+            let mut proxy = proxy
+                .into_daemon_store_adapter(DuplexP2PStream(rx, tx))
+                .await?;
+            proxy.run().await?;
+        }
+    };
 
     Ok(())
 }
@@ -117,7 +128,12 @@ async fn connect_to_remote(
 
 async fn serve_to_remote() -> Result<DuplexP2PStream<RecvStream, SendStream>> {
     let ep = Endpoint::builder().bind().await?;
+    let addr = ep.node_id();
+
+    println!("address is {addr}");
+
     let conn = ep.accept().await.context("unable to open uni")?.await?;
+
     let (tx, rx) = conn.accept_bi().await?;
     let stream = DuplexP2PStream::new(rx, tx);
     Ok(stream)
