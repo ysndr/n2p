@@ -12,6 +12,9 @@
       "jujutsu": {
         "pkg-path": "jujutsu"
       },
+      "libiconv": {
+        "pkg-path": "libiconv"
+      },
       "rustc": {
         "pkg-path": "rustc"
       }
@@ -24,17 +27,17 @@
     {
       "attr_path": "cargo",
       "broken": false,
-      "derivation": "/nix/store/c54ll5irj2l4a1i8c4ksxkafwm3qhx2l-cargo-1.88.0.drv",
+      "derivation": "/nix/store/l0fnr8h9l9mh3s5xfayj4lz4ynh7wj3r-cargo-1.88.0.drv",
       "description": "Downloads your Rust project's dependencies and builds your project",
       "install_id": "cargo",
       "license": "[ MIT, Apache-2.0 ]",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=c87b95e25065c028d31a94f06a62927d18763fdf",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=dc9637876d0dcc8c9e5e22986b857632effeb727",
       "name": "cargo-1.88.0",
       "pname": "cargo",
-      "rev": "c87b95e25065c028d31a94f06a62927d18763fdf",
-      "rev_count": 832220,
-      "rev_date": "2025-07-19T18:42:28Z",
-      "scrape_date": "2025-07-21T00:30:09.977986Z",
+      "rev": "dc9637876d0dcc8c9e5e22986b857632effeb727",
+      "rev_count": 836203,
+      "rev_date": "2025-07-28T09:26:29Z",
+      "scrape_date": "2025-07-30T00:28:04.852220Z",
       "stabilities": [
         "unstable"
       ],
@@ -44,7 +47,7 @@
         "out"
       ],
       "outputs": {
-        "out": "/nix/store/xi7h5x85b0jasfjywj033hhrvarqpsm9-cargo-1.88.0"
+        "out": "/nix/store/3iyviwimri8mq0cqv4abg9mibkcyc1cy-cargo-1.88.0"
       },
       "system": "aarch64-darwin",
       "group": "toplevel",
@@ -53,17 +56,17 @@
     {
       "attr_path": "cargo",
       "broken": false,
-      "derivation": "/nix/store/2rky6d7kgdyns4iafiqc77x9sph929ap-cargo-1.88.0.drv",
+      "derivation": "/nix/store/9x6znj90by8zqlg4vba9pr7al6qhid30-cargo-1.88.0.drv",
       "description": "Downloads your Rust project's dependencies and builds your project",
       "install_id": "cargo",
       "license": "[ MIT, Apache-2.0 ]",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=c87b95e25065c028d31a94f06a62927d18763fdf",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=dc9637876d0dcc8c9e5e22986b857632effeb727",
       "name": "cargo-1.88.0",
       "pname": "cargo",
-      "rev": "c87b95e25065c028d31a94f06a62927d18763fdf",
-      "rev_count": 832220,
-      "rev_date": "2025-07-19T18:42:28Z",
-      "scrape_date": "2025-07-21T00:53:21.890806Z",
+      "rev": "dc9637876d0dcc8c9e5e22986b857632effeb727",
+      "rev_count": 836203,
+      "rev_date": "2025-07-28T09:26:29Z",
+      "scrape_date": "2025-07-30T00:47:40.398158Z",
       "stabilities": [
         "unstable"
       ],
@@ -73,7 +76,7 @@
         "out"
       ],
       "outputs": {
-        "out": "/nix/store/xy5h5sv2fp8mq2vs8cvbx5ajpcmzy8gq-cargo-1.88.0"
+        "out": "/nix/store/6w7lghpjhkd5pw9y0hnnmg5w341jswyd-cargo-1.88.0"
       },
       "system": "aarch64-linux",
       "group": "toplevel",
@@ -82,17 +85,17 @@
     {
       "attr_path": "cargo",
       "broken": false,
-      "derivation": "/nix/store/v7gcjjrfhmjvp7b5kgi13s4lwmbh0g9z-cargo-1.88.0.drv",
+      "derivation": "/nix/store/ggvfv7hw3gd6w1jnwx67s72vcxxdcq1l-cargo-1.88.0.drv",
       "description": "Downloads your Rust project's dependencies and builds your project",
       "install_id": "cargo",
       "license": "[ MIT, Apache-2.0 ]",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=c87b95e25065c028d31a94f06a62927d18763fdf",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=dc9637876d0dcc8c9e5e22986b857632effeb727",
       "name": "cargo-1.88.0",
       "pname": "cargo",
-      "rev": "c87b95e25065c028d31a94f06a62927d18763fdf",
-      "rev_count": 832220,
-      "rev_date": "2025-07-19T18:42:28Z",
-      "scrape_date": "2025-07-21T01:13:50.356362Z",
+      "rev": "dc9637876d0dcc8c9e5e22986b857632effeb727",
+      "rev_count": 836203,
+      "rev_date": "2025-07-28T09:26:29Z",
+      "scrape_date": "2025-07-30T01:07:25.160678Z",
       "stabilities": [
         "unstable"
       ],
@@ -102,7 +105,7 @@
         "out"
       ],
       "outputs": {
-        "out": "/nix/store/d8nws85q8hri9qygxcgkz3g6m876cdvb-cargo-1.88.0"
+        "out": "/nix/store/8kwb2jmbf9xjhr18nw8sa66c0kivsqc4-cargo-1.88.0"
       },
       "system": "x86_64-darwin",
       "group": "toplevel",
@@ -111,17 +114,17 @@
     {
       "attr_path": "cargo",
       "broken": false,
-      "derivation": "/nix/store/wsy5p4qb1jv0m1md4vbnwbyq8rc95gsd-cargo-1.88.0.drv",
+      "derivation": "/nix/store/bz3dslm505q0dnxs2ccgcx7ar78d23kp-cargo-1.88.0.drv",
       "description": "Downloads your Rust project's dependencies and builds your project",
       "install_id": "cargo",
       "license": "[ MIT, Apache-2.0 ]",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=c87b95e25065c028d31a94f06a62927d18763fdf",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=dc9637876d0dcc8c9e5e22986b857632effeb727",
       "name": "cargo-1.88.0",
       "pname": "cargo",
-      "rev": "c87b95e25065c028d31a94f06a62927d18763fdf",
-      "rev_count": 832220,
-      "rev_date": "2025-07-19T18:42:28Z",
-      "scrape_date": "2025-07-21T01:37:35.865474Z",
+      "rev": "dc9637876d0dcc8c9e5e22986b857632effeb727",
+      "rev_count": 836203,
+      "rev_date": "2025-07-28T09:26:29Z",
+      "scrape_date": "2025-07-30T01:31:20.265571Z",
       "stabilities": [
         "unstable"
       ],
@@ -131,7 +134,7 @@
         "out"
       ],
       "outputs": {
-        "out": "/nix/store/bcv2nzjldz3swhjdn07zmd897kl6y1xf-cargo-1.88.0"
+        "out": "/nix/store/kg6psfcz4vjcvv8bpyvw422vrndrcq50-cargo-1.88.0"
       },
       "system": "x86_64-linux",
       "group": "toplevel",
@@ -140,17 +143,17 @@
     {
       "attr_path": "clippy",
       "broken": false,
-      "derivation": "/nix/store/1mr3ms82ql3kmqv161xn33b6hn0rpsp5-clippy-1.88.0.drv",
+      "derivation": "/nix/store/2fwf8kfm8nbjmg32ibic49an0hrfg560-clippy-1.88.0.drv",
       "description": "Bunch of lints to catch common mistakes and improve your Rust code",
       "install_id": "clippy",
       "license": "[ MIT, Apache-2.0 ]",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=c87b95e25065c028d31a94f06a62927d18763fdf",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=dc9637876d0dcc8c9e5e22986b857632effeb727",
       "name": "clippy-1.88.0",
       "pname": "clippy",
-      "rev": "c87b95e25065c028d31a94f06a62927d18763fdf",
-      "rev_count": 832220,
-      "rev_date": "2025-07-19T18:42:28Z",
-      "scrape_date": "2025-07-21T00:30:10.125572Z",
+      "rev": "dc9637876d0dcc8c9e5e22986b857632effeb727",
+      "rev_count": 836203,
+      "rev_date": "2025-07-28T09:26:29Z",
+      "scrape_date": "2025-07-30T00:28:04.992836Z",
       "stabilities": [
         "unstable"
       ],
@@ -160,7 +163,7 @@
         "out"
       ],
       "outputs": {
-        "out": "/nix/store/bzzbdikfh0x86ml9bi9iq4fhfd4zalif-clippy-1.88.0"
+        "out": "/nix/store/20qxk0y4g7ic0d25nkyrcdkq9lmv7rsd-clippy-1.88.0"
       },
       "system": "aarch64-darwin",
       "group": "toplevel",
@@ -169,17 +172,17 @@
     {
       "attr_path": "clippy",
       "broken": false,
-      "derivation": "/nix/store/8pgh0gp4s5plrka8dznz0kd45l7hcvc4-clippy-1.88.0.drv",
+      "derivation": "/nix/store/zmkx2ip1xfdrhanj7llv9c04ppj977fd-clippy-1.88.0.drv",
       "description": "Bunch of lints to catch common mistakes and improve your Rust code",
       "install_id": "clippy",
       "license": "[ MIT, Apache-2.0 ]",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=c87b95e25065c028d31a94f06a62927d18763fdf",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=dc9637876d0dcc8c9e5e22986b857632effeb727",
       "name": "clippy-1.88.0",
       "pname": "clippy",
-      "rev": "c87b95e25065c028d31a94f06a62927d18763fdf",
-      "rev_count": 832220,
-      "rev_date": "2025-07-19T18:42:28Z",
-      "scrape_date": "2025-07-21T00:53:22.073365Z",
+      "rev": "dc9637876d0dcc8c9e5e22986b857632effeb727",
+      "rev_count": 836203,
+      "rev_date": "2025-07-28T09:26:29Z",
+      "scrape_date": "2025-07-30T00:47:40.580480Z",
       "stabilities": [
         "unstable"
       ],
@@ -189,8 +192,8 @@
         "out"
       ],
       "outputs": {
-        "debug": "/nix/store/a5lh3avd9zi87446xz2lhialzb735zia-clippy-1.88.0-debug",
-        "out": "/nix/store/v542xq7idn1lxx6jrs2qi56ms67s0ljy-clippy-1.88.0"
+        "debug": "/nix/store/vflr32izkxnkd8v69xrxzgfnjxvcav14-clippy-1.88.0-debug",
+        "out": "/nix/store/br780x98g90f52dlss36zgizzjv2fr5q-clippy-1.88.0"
       },
       "system": "aarch64-linux",
       "group": "toplevel",
@@ -199,17 +202,17 @@
     {
       "attr_path": "clippy",
       "broken": false,
-      "derivation": "/nix/store/zxhmcz69rrx1smynavkmz7z1whrl9zd0-clippy-1.88.0.drv",
+      "derivation": "/nix/store/m0xjwr531n829m706bfv7xqwb3wmq7wy-clippy-1.88.0.drv",
       "description": "Bunch of lints to catch common mistakes and improve your Rust code",
       "install_id": "clippy",
       "license": "[ MIT, Apache-2.0 ]",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=c87b95e25065c028d31a94f06a62927d18763fdf",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=dc9637876d0dcc8c9e5e22986b857632effeb727",
       "name": "clippy-1.88.0",
       "pname": "clippy",
-      "rev": "c87b95e25065c028d31a94f06a62927d18763fdf",
-      "rev_count": 832220,
-      "rev_date": "2025-07-19T18:42:28Z",
-      "scrape_date": "2025-07-21T01:13:50.499734Z",
+      "rev": "dc9637876d0dcc8c9e5e22986b857632effeb727",
+      "rev_count": 836203,
+      "rev_date": "2025-07-28T09:26:29Z",
+      "scrape_date": "2025-07-30T01:07:25.303385Z",
       "stabilities": [
         "unstable"
       ],
@@ -219,7 +222,7 @@
         "out"
       ],
       "outputs": {
-        "out": "/nix/store/di0hy2rhc315pay1i3mgrazlvfdfrq85-clippy-1.88.0"
+        "out": "/nix/store/rg7mdv096hv47sz82x79sii4dxzpky7f-clippy-1.88.0"
       },
       "system": "x86_64-darwin",
       "group": "toplevel",
@@ -228,17 +231,17 @@
     {
       "attr_path": "clippy",
       "broken": false,
-      "derivation": "/nix/store/nws1a8l9wajihii0b6nrfsqxrv239ims-clippy-1.88.0.drv",
+      "derivation": "/nix/store/cmlzh06bmr3xs9zcgzpn3m9s76wcy2ym-clippy-1.88.0.drv",
       "description": "Bunch of lints to catch common mistakes and improve your Rust code",
       "install_id": "clippy",
       "license": "[ MIT, Apache-2.0 ]",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=c87b95e25065c028d31a94f06a62927d18763fdf",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=dc9637876d0dcc8c9e5e22986b857632effeb727",
       "name": "clippy-1.88.0",
       "pname": "clippy",
-      "rev": "c87b95e25065c028d31a94f06a62927d18763fdf",
-      "rev_count": 832220,
-      "rev_date": "2025-07-19T18:42:28Z",
-      "scrape_date": "2025-07-21T01:37:36.064797Z",
+      "rev": "dc9637876d0dcc8c9e5e22986b857632effeb727",
+      "rev_count": 836203,
+      "rev_date": "2025-07-28T09:26:29Z",
+      "scrape_date": "2025-07-30T01:31:20.463370Z",
       "stabilities": [
         "unstable"
       ],
@@ -248,8 +251,8 @@
         "out"
       ],
       "outputs": {
-        "debug": "/nix/store/p4nhz92w5z5jvwvl43zpxlvjnifmk6q6-clippy-1.88.0-debug",
-        "out": "/nix/store/d0ghrs9xyvkwajn5zsavpd15f2m5cc9p-clippy-1.88.0"
+        "debug": "/nix/store/q3rv3l0bbq0v132cr7z2avmlami10izd-clippy-1.88.0-debug",
+        "out": "/nix/store/69r97yvadjf8agnagrq0jzyfnz20c7p3-clippy-1.88.0"
       },
       "system": "x86_64-linux",
       "group": "toplevel",
@@ -258,17 +261,17 @@
     {
       "attr_path": "jujutsu",
       "broken": false,
-      "derivation": "/nix/store/lqy024qixniiqsjwkszf4hmvckgzl45k-jujutsu-0.31.0.drv",
+      "derivation": "/nix/store/9f1w2jf23fvqc41ffi9vnxcqhjdf58s9-jujutsu-0.31.0.drv",
       "description": "Git-compatible DVCS that is both simple and powerful",
       "install_id": "jujutsu",
       "license": "Apache-2.0",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=c87b95e25065c028d31a94f06a62927d18763fdf",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=dc9637876d0dcc8c9e5e22986b857632effeb727",
       "name": "jujutsu-0.31.0",
       "pname": "jujutsu",
-      "rev": "c87b95e25065c028d31a94f06a62927d18763fdf",
-      "rev_count": 832220,
-      "rev_date": "2025-07-19T18:42:28Z",
-      "scrape_date": "2025-07-21T00:30:11.283505Z",
+      "rev": "dc9637876d0dcc8c9e5e22986b857632effeb727",
+      "rev_count": 836203,
+      "rev_date": "2025-07-28T09:26:29Z",
+      "scrape_date": "2025-07-30T00:28:06.117652Z",
       "stabilities": [
         "unstable"
       ],
@@ -278,7 +281,7 @@
         "out"
       ],
       "outputs": {
-        "out": "/nix/store/421n0azh9f81a022ag7lrzs4hihk6l7r-jujutsu-0.31.0"
+        "out": "/nix/store/0zbb4i6gybsqxg5qyny3nlr35jk0gd8k-jujutsu-0.31.0"
       },
       "system": "aarch64-darwin",
       "group": "toplevel",
@@ -287,17 +290,17 @@
     {
       "attr_path": "jujutsu",
       "broken": false,
-      "derivation": "/nix/store/sj4b16yj0i3d30jvkwzkrzsg3mmw07sz-jujutsu-0.31.0.drv",
+      "derivation": "/nix/store/a0p9m92cz066qfdg4d67h01bwrrhad1s-jujutsu-0.31.0.drv",
       "description": "Git-compatible DVCS that is both simple and powerful",
       "install_id": "jujutsu",
       "license": "Apache-2.0",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=c87b95e25065c028d31a94f06a62927d18763fdf",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=dc9637876d0dcc8c9e5e22986b857632effeb727",
       "name": "jujutsu-0.31.0",
       "pname": "jujutsu",
-      "rev": "c87b95e25065c028d31a94f06a62927d18763fdf",
-      "rev_count": 832220,
-      "rev_date": "2025-07-19T18:42:28Z",
-      "scrape_date": "2025-07-21T00:53:24.853395Z",
+      "rev": "dc9637876d0dcc8c9e5e22986b857632effeb727",
+      "rev_count": 836203,
+      "rev_date": "2025-07-28T09:26:29Z",
+      "scrape_date": "2025-07-30T00:47:43.330804Z",
       "stabilities": [
         "unstable"
       ],
@@ -307,7 +310,7 @@
         "out"
       ],
       "outputs": {
-        "out": "/nix/store/rsqa26608gnnxblm3c7ckxghqnh7wd56-jujutsu-0.31.0"
+        "out": "/nix/store/6r514sghaawis92v72mlnw4pgzidi4sx-jujutsu-0.31.0"
       },
       "system": "aarch64-linux",
       "group": "toplevel",
@@ -316,17 +319,17 @@
     {
       "attr_path": "jujutsu",
       "broken": false,
-      "derivation": "/nix/store/9xx3s6bijjipv3d0wz7qk7lixgr14s64-jujutsu-0.31.0.drv",
+      "derivation": "/nix/store/rsdq1raxgjmhd8sc3l2xrcdcfy4g2b41-jujutsu-0.31.0.drv",
       "description": "Git-compatible DVCS that is both simple and powerful",
       "install_id": "jujutsu",
       "license": "Apache-2.0",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=c87b95e25065c028d31a94f06a62927d18763fdf",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=dc9637876d0dcc8c9e5e22986b857632effeb727",
       "name": "jujutsu-0.31.0",
       "pname": "jujutsu",
-      "rev": "c87b95e25065c028d31a94f06a62927d18763fdf",
-      "rev_count": 832220,
-      "rev_date": "2025-07-19T18:42:28Z",
-      "scrape_date": "2025-07-21T01:13:51.692616Z",
+      "rev": "dc9637876d0dcc8c9e5e22986b857632effeb727",
+      "rev_count": 836203,
+      "rev_date": "2025-07-28T09:26:29Z",
+      "scrape_date": "2025-07-30T01:07:26.481708Z",
       "stabilities": [
         "unstable"
       ],
@@ -336,7 +339,7 @@
         "out"
       ],
       "outputs": {
-        "out": "/nix/store/zkjy092v2x4pj4qmbf79h71kn2rz3jwa-jujutsu-0.31.0"
+        "out": "/nix/store/8kk19jqhn0b7q2z1saydc593d8s3v77y-jujutsu-0.31.0"
       },
       "system": "x86_64-darwin",
       "group": "toplevel",
@@ -345,17 +348,17 @@
     {
       "attr_path": "jujutsu",
       "broken": false,
-      "derivation": "/nix/store/6jksyd9if5wqyzlizs9sdngqkh3rs1sh-jujutsu-0.31.0.drv",
+      "derivation": "/nix/store/mq5r5j4f86jwwb6fkshiacvv8sgccv02-jujutsu-0.31.0.drv",
       "description": "Git-compatible DVCS that is both simple and powerful",
       "install_id": "jujutsu",
       "license": "Apache-2.0",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=c87b95e25065c028d31a94f06a62927d18763fdf",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=dc9637876d0dcc8c9e5e22986b857632effeb727",
       "name": "jujutsu-0.31.0",
       "pname": "jujutsu",
-      "rev": "c87b95e25065c028d31a94f06a62927d18763fdf",
-      "rev_count": 832220,
-      "rev_date": "2025-07-19T18:42:28Z",
-      "scrape_date": "2025-07-21T01:37:39.098504Z",
+      "rev": "dc9637876d0dcc8c9e5e22986b857632effeb727",
+      "rev_count": 836203,
+      "rev_date": "2025-07-28T09:26:29Z",
+      "scrape_date": "2025-07-30T01:31:23.467794Z",
       "stabilities": [
         "unstable"
       ],
@@ -365,7 +368,121 @@
         "out"
       ],
       "outputs": {
-        "out": "/nix/store/kr3rxgmzxny2yln266vr3c7a9ax74y8j-jujutsu-0.31.0"
+        "out": "/nix/store/w6s7w4izhwaq8a665p7k60canq2rw7zy-jujutsu-0.31.0"
+      },
+      "system": "x86_64-linux",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "libiconv",
+      "broken": false,
+      "derivation": "/nix/store/zfb3pabhlqmj4d9b0835pxvxwlhr709v-libiconv-109.drv",
+      "description": "Iconv(3) implementation",
+      "install_id": "libiconv",
+      "license": "[ BSD-2-Clause, BSD-3-Clause, APSL-1.0 ]",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=dc9637876d0dcc8c9e5e22986b857632effeb727",
+      "name": "libiconv-109",
+      "pname": "libiconv",
+      "rev": "dc9637876d0dcc8c9e5e22986b857632effeb727",
+      "rev_count": 836203,
+      "rev_date": "2025-07-28T09:26:29Z",
+      "scrape_date": "2025-07-30T00:28:06.448331Z",
+      "stabilities": [
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "109",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "dev": "/nix/store/mcc940l8kl31m86qsi4ns5bcafsp7vfi-libiconv-109-dev",
+        "out": "/nix/store/lcpbdhaw5yrw96kghpq9d5z0cfq4ljq5-libiconv-109"
+      },
+      "system": "aarch64-darwin",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "libiconv",
+      "broken": false,
+      "derivation": "/nix/store/s6jim7013wgnz43471i4yr7w04y96i8k-glibc-iconv-2.40.drv",
+      "install_id": "libiconv",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=dc9637876d0dcc8c9e5e22986b857632effeb727",
+      "name": "glibc-iconv-2.40",
+      "pname": "libiconv",
+      "rev": "dc9637876d0dcc8c9e5e22986b857632effeb727",
+      "rev_count": 836203,
+      "rev_date": "2025-07-28T09:26:29Z",
+      "scrape_date": "2025-07-30T00:47:44.212178Z",
+      "stabilities": [
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "2.40",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/rwzmi4ilxx7hw0cfv4ah566mvmgmn2vg-glibc-iconv-2.40"
+      },
+      "system": "aarch64-linux",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "libiconv",
+      "broken": false,
+      "derivation": "/nix/store/bxlcqgvv3w352vqv9pn2ikv45wa7r44c-libiconv-109.drv",
+      "description": "Iconv(3) implementation",
+      "install_id": "libiconv",
+      "license": "[ BSD-2-Clause, BSD-3-Clause, APSL-1.0 ]",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=dc9637876d0dcc8c9e5e22986b857632effeb727",
+      "name": "libiconv-109",
+      "pname": "libiconv",
+      "rev": "dc9637876d0dcc8c9e5e22986b857632effeb727",
+      "rev_count": 836203,
+      "rev_date": "2025-07-28T09:26:29Z",
+      "scrape_date": "2025-07-30T01:07:26.817303Z",
+      "stabilities": [
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "109",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "dev": "/nix/store/kn2rgsbvpg9nz998mi6nnzcbsfb8jgxl-libiconv-109-dev",
+        "out": "/nix/store/8xi6xc6hgs7saynm4xnlpdl99k37ddfi-libiconv-109"
+      },
+      "system": "x86_64-darwin",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "libiconv",
+      "broken": false,
+      "derivation": "/nix/store/zw8kgia0hrycx3kzx9xvy70ldvaw4zp4-glibc-iconv-2.40.drv",
+      "install_id": "libiconv",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=dc9637876d0dcc8c9e5e22986b857632effeb727",
+      "name": "glibc-iconv-2.40",
+      "pname": "libiconv",
+      "rev": "dc9637876d0dcc8c9e5e22986b857632effeb727",
+      "rev_count": 836203,
+      "rev_date": "2025-07-28T09:26:29Z",
+      "scrape_date": "2025-07-30T01:31:24.406484Z",
+      "stabilities": [
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "2.40",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/01kpygqq1mhqjw4x0qbf42lmn8cnwkiy-glibc-iconv-2.40"
       },
       "system": "x86_64-linux",
       "group": "toplevel",
@@ -374,17 +491,17 @@
     {
       "attr_path": "rustc",
       "broken": false,
-      "derivation": "/nix/store/lab83py43hq6dg9nr11hcz9z331wkp0j-rustc-wrapper-1.88.0.drv",
+      "derivation": "/nix/store/36il1x268jlgfjr5vhy990jvg199415d-rustc-wrapper-1.88.0.drv",
       "description": "Safe, concurrent, practical language (wrapper script)",
       "install_id": "rustc",
       "license": "[ MIT, Apache-2.0 ]",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=c87b95e25065c028d31a94f06a62927d18763fdf",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=dc9637876d0dcc8c9e5e22986b857632effeb727",
       "name": "rustc-wrapper-1.88.0",
       "pname": "rustc",
-      "rev": "c87b95e25065c028d31a94f06a62927d18763fdf",
-      "rev_count": 832220,
-      "rev_date": "2025-07-19T18:42:28Z",
-      "scrape_date": "2025-07-21T00:30:45.313560Z",
+      "rev": "dc9637876d0dcc8c9e5e22986b857632effeb727",
+      "rev_count": 836203,
+      "rev_date": "2025-07-28T09:26:29Z",
+      "scrape_date": "2025-07-30T00:28:38.613183Z",
       "stabilities": [
         "unstable"
       ],
@@ -395,9 +512,9 @@
         "out"
       ],
       "outputs": {
-        "doc": "/nix/store/ij0msz7dqdw652hdhcbvv318723jfn6k-rustc-wrapper-1.88.0-doc",
-        "man": "/nix/store/39f5ff78h6az71w1iklx4g5w43cbxz5g-rustc-wrapper-1.88.0-man",
-        "out": "/nix/store/b5gyjynayc5aybb1dl4d47xir97i2cnk-rustc-wrapper-1.88.0"
+        "doc": "/nix/store/43jx4b5a1vzns6rlrm869zqzdkn2kfsz-rustc-wrapper-1.88.0-doc",
+        "man": "/nix/store/zjq6arkcmxgl6ghjrwg57ay2m0qsjcbj-rustc-wrapper-1.88.0-man",
+        "out": "/nix/store/3skm2cmdy8g31xbqz169lzsb7x9dvrk6-rustc-wrapper-1.88.0"
       },
       "system": "aarch64-darwin",
       "group": "toplevel",
@@ -406,17 +523,17 @@
     {
       "attr_path": "rustc",
       "broken": false,
-      "derivation": "/nix/store/v24mhmmgi5djx2ygxw716lpg9ayhpqz3-rustc-wrapper-1.88.0.drv",
+      "derivation": "/nix/store/aawy96a19hchqai03i2i7rq73n8jbjqb-rustc-wrapper-1.88.0.drv",
       "description": "Safe, concurrent, practical language (wrapper script)",
       "install_id": "rustc",
       "license": "[ MIT, Apache-2.0 ]",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=c87b95e25065c028d31a94f06a62927d18763fdf",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=dc9637876d0dcc8c9e5e22986b857632effeb727",
       "name": "rustc-wrapper-1.88.0",
       "pname": "rustc",
-      "rev": "c87b95e25065c028d31a94f06a62927d18763fdf",
-      "rev_count": 832220,
-      "rev_date": "2025-07-19T18:42:28Z",
-      "scrape_date": "2025-07-21T00:54:18.789509Z",
+      "rev": "dc9637876d0dcc8c9e5e22986b857632effeb727",
+      "rev_count": 836203,
+      "rev_date": "2025-07-28T09:26:29Z",
+      "scrape_date": "2025-07-30T00:48:37.165934Z",
       "stabilities": [
         "unstable"
       ],
@@ -427,9 +544,9 @@
         "out"
       ],
       "outputs": {
-        "doc": "/nix/store/2m1isqw4fdgpcq42akkm1r4y1h834k95-rustc-wrapper-1.88.0-doc",
-        "man": "/nix/store/pnp14wn1zbrkq8aawx8qsqrlqry8hsxa-rustc-wrapper-1.88.0-man",
-        "out": "/nix/store/b9f32gh63h4jd8w26rfb9d9qj9wgaya5-rustc-wrapper-1.88.0"
+        "doc": "/nix/store/a8m2n4byzxff2738rgynhk4m7m4z7lmh-rustc-wrapper-1.88.0-doc",
+        "man": "/nix/store/39wlbfwhafzqqz4ivj126sxphfzsgd3s-rustc-wrapper-1.88.0-man",
+        "out": "/nix/store/3w2lyncwvbic72pjch38830c6090fmpq-rustc-wrapper-1.88.0"
       },
       "system": "aarch64-linux",
       "group": "toplevel",
@@ -438,17 +555,17 @@
     {
       "attr_path": "rustc",
       "broken": false,
-      "derivation": "/nix/store/k97fiayqkl80qfwak0fdqmw3axha74vs-rustc-wrapper-1.88.0.drv",
+      "derivation": "/nix/store/s089aib2xyzn1k3y86zgvmzsrwqypc1a-rustc-wrapper-1.88.0.drv",
       "description": "Safe, concurrent, practical language (wrapper script)",
       "install_id": "rustc",
       "license": "[ MIT, Apache-2.0 ]",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=c87b95e25065c028d31a94f06a62927d18763fdf",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=dc9637876d0dcc8c9e5e22986b857632effeb727",
       "name": "rustc-wrapper-1.88.0",
       "pname": "rustc",
-      "rev": "c87b95e25065c028d31a94f06a62927d18763fdf",
-      "rev_count": 832220,
-      "rev_date": "2025-07-19T18:42:28Z",
-      "scrape_date": "2025-07-21T01:14:24.841731Z",
+      "rev": "dc9637876d0dcc8c9e5e22986b857632effeb727",
+      "rev_count": 836203,
+      "rev_date": "2025-07-28T09:26:29Z",
+      "scrape_date": "2025-07-30T01:07:59.103248Z",
       "stabilities": [
         "unstable"
       ],
@@ -459,9 +576,9 @@
         "out"
       ],
       "outputs": {
-        "doc": "/nix/store/ivnnbbksixaq7dskypqzkgq90jkr4i1f-rustc-wrapper-1.88.0-doc",
-        "man": "/nix/store/yd9zkk3nandp3hz9vynm5jsxvgl9wdpf-rustc-wrapper-1.88.0-man",
-        "out": "/nix/store/kdh89qs52xdspa4k3pljj1s0pq5a8s51-rustc-wrapper-1.88.0"
+        "doc": "/nix/store/bilr4glals1gdaa4fvqdd43sm233z1v7-rustc-wrapper-1.88.0-doc",
+        "man": "/nix/store/g3sc5lw4c2f7gpxzdhrd5wjr0ddv0cig-rustc-wrapper-1.88.0-man",
+        "out": "/nix/store/m0kv84sl58xd11fms81yl7ks5a6203zr-rustc-wrapper-1.88.0"
       },
       "system": "x86_64-darwin",
       "group": "toplevel",
@@ -470,17 +587,17 @@
     {
       "attr_path": "rustc",
       "broken": false,
-      "derivation": "/nix/store/9vdyg2fscpwwcw24ihxq0i72z0q367by-rustc-wrapper-1.88.0.drv",
+      "derivation": "/nix/store/a07x09yac1pjzbcb5jz7qahypq98xy65-rustc-wrapper-1.88.0.drv",
       "description": "Safe, concurrent, practical language (wrapper script)",
       "install_id": "rustc",
       "license": "[ MIT, Apache-2.0 ]",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=c87b95e25065c028d31a94f06a62927d18763fdf",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=dc9637876d0dcc8c9e5e22986b857632effeb727",
       "name": "rustc-wrapper-1.88.0",
       "pname": "rustc",
-      "rev": "c87b95e25065c028d31a94f06a62927d18763fdf",
-      "rev_count": 832220,
-      "rev_date": "2025-07-19T18:42:28Z",
-      "scrape_date": "2025-07-21T01:38:37.918166Z",
+      "rev": "dc9637876d0dcc8c9e5e22986b857632effeb727",
+      "rev_count": 836203,
+      "rev_date": "2025-07-28T09:26:29Z",
+      "scrape_date": "2025-07-30T01:32:21.616987Z",
       "stabilities": [
         "unstable"
       ],
@@ -491,9 +608,9 @@
         "out"
       ],
       "outputs": {
-        "doc": "/nix/store/2miwl4b08x1p8zpjaw688brv14vrn3nw-rustc-wrapper-1.88.0-doc",
-        "man": "/nix/store/kwzbhbs491p6jgq0g2cazmlwwdp1gs01-rustc-wrapper-1.88.0-man",
-        "out": "/nix/store/55xkmcp7rhryyllgdnd63xk3xsmlqacq-rustc-wrapper-1.88.0"
+        "doc": "/nix/store/3hjn39rypqbfavrw0mc1whgz186isysr-rustc-wrapper-1.88.0-doc",
+        "man": "/nix/store/y9vhsm8q6s0p6by0wy27j2fv2w7nb3r6-rustc-wrapper-1.88.0-man",
+        "out": "/nix/store/i19xh91f80g01v4ad3x363g4538z2qx9-rustc-wrapper-1.88.0"
       },
       "system": "x86_64-linux",
       "group": "toplevel",

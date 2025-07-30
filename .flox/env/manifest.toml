@@ -19,6 +19,7 @@ rustc.pkg-path = "rustc"
 cargo.pkg-path = "cargo"
 clippy.pkg-path = "clippy"
 jujutsu.pkg-path = "jujutsu"
+libiconv.pkg-path = "libiconv"
 # gum.pkg-path = "gum"
 # gum.version = "^0.14.5"
 
