@@ -12,8 +12,8 @@ use nix_daemon::{
     nix::{DaemonProtocolAdapter, DaemonStore},
 };
 use tokio::{
-    io::{AsyncRead, AsyncReadExt, AsyncWrite, AsyncWriteExt},
-    net::UnixStream,
+    io::{self, AsyncRead, AsyncReadExt, AsyncWrite, AsyncWriteExt},
+    net::{UnixSocket, UnixStream},
 };
 
 #[derive(Debug, clap::Parser)]
@@ -39,8 +39,23 @@ async fn main() -> Result<()> {
 
             let server = serve_to_remote().await?;
 
-            let mut proxy = local.into_daemon_store_adapter(server).await?;
-            proxy.run().await?
+            loop {
+                let conn = server.accept().await.context("unable to open uni")?.await?;
+                let (tx, rx) = conn.accept_bi().await?;
+                let stream = DuplexP2PStream::new(rx, tx);
+
+                let mut proxy = local.into_daemon_store_adapter(stream).await?;
+                match proxy.run().await {
+                    Ok(()) => continue,
+                    Err(ref err @ nix_daemon::Error::IO(ref io))
+                        if io.kind() == io::ErrorKind::NotConnected =>
+                    {
+                        dbg!(err);
+                        continue;
+                    }
+                    Err(err) => Err(err)?,
+                }
+            }
         }
         Mode::Client { server_address } => {
             let stream = tokio::net::UnixSocket::new_stream()?;
@@ -48,18 +63,18 @@ async fn main() -> Result<()> {
             let listener = stream.listen(128)?;
 
             let client = connect_to_remote(server_address.node_addr().clone()).await?;
-
             let mut proxy = Sending::new(client);
-            let (mut socket, _) = listener.accept().await?;
-            let (rx, tx) = socket.split();
-            let mut proxy = proxy
-                .into_daemon_store_adapter(DuplexP2PStream(rx, tx))
-                .await?;
-            proxy.run().await?;
+
+            loop {
+                let (mut socket, _) = listener.accept().await?;
+                let (rx, tx) = socket.split();
+                let mut proxy = proxy
+                    .into_daemon_store_adapter(DuplexP2PStream(rx, tx))
+                    .await?;
+                proxy.run().await?;
+            }
         }
     };
-
-    Ok(())
 }
 
 struct DuplexP2PStream<R, W>(R, W);
@@ -133,7 +148,7 @@ async fn connect_to_remote(
     Ok(conn)
 }
 
-async fn serve_to_remote() -> Result<DuplexP2PStream<RecvStream, SendStream>> {
+async fn serve_to_remote() -> Result<Endpoint> {
     let ep = Endpoint::builder()
         .alpns(["my-alpn".into()].to_vec())
         .relay_mode(iroh::RelayMode::Default)
@@ -153,11 +168,7 @@ async fn serve_to_remote() -> Result<DuplexP2PStream<RecvStream, SendStream>> {
 
     println!("address is {ticket}");
 
-    let conn = ep.accept().await.context("unable to open uni")?.await?;
-
-    let (tx, rx) = conn.accept_bi().await?;
-    let stream = DuplexP2PStream::new(rx, tx);
-    Ok(stream)
+    Ok(ep)
 }
 
 async fn connect_to_local_daemon() -> Result<DaemonStore<UnixStream>> {
