@@ -6,7 +6,8 @@ edition = "2024"
 [dependencies]
 iroh-base = { version = "0.90", features = ["ticket"] }
 iroh = { version = "0.90" }
-nix-daemon = "0.1"
+nix-daemon = { path = "../gorgon/nix-daemon" }
+# nix-daemon = "0.1.1"
 clap = { version = "4", features = ["derive"] }
 tokio = "1"
 anyhow = "1"
