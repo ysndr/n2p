@@ -20,6 +20,7 @@ cargo.pkg-path = "cargo"
 clippy.pkg-path = "clippy"
 jujutsu.pkg-path = "jujutsu"
 libiconv.pkg-path = "libiconv"
+gcc.pkg-path = "gcc"
 # gum.pkg-path = "gum"
 # gum.version = "^0.14.5"
 
