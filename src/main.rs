@@ -34,44 +34,62 @@ async fn main() -> Result<()> {
     let args = Args::parse();
     match args.mode {
         Mode::Server => {
-            let local = connect_to_local_daemon().await?;
-            let mut local = Receiving::new(local);
+            // let local = connect_to_local_daemon().await?;
+            // let mut local = Receiving::new(local);
 
             let server = serve_to_remote().await?;
 
             loop {
                 let conn = server.accept().await.context("unable to open uni")?.await?;
-                let (tx, rx) = conn.accept_bi().await?;
-                let stream = DuplexP2PStream::new(rx, tx);
 
-                let mut proxy = local.into_daemon_store_adapter(stream).await?;
-                match proxy.run().await {
-                    Ok(()) => continue,
-                    Err(ref err @ nix_daemon::Error::IO(ref io))
-                        if io.kind() == io::ErrorKind::NotConnected =>
-                    {
-                        dbg!(err);
-                        continue;
-                    }
-                    Err(err) => Err(err)?,
-                }
+                let mut local = tokio::net::UnixSocket::new_stream()?
+                    .connect("/nix/var/nix/daemon-socket/socket")
+                    .await?;
+
+                let (tx, rx) = conn.accept_bi().await?;
+                let mut stream = DuplexP2PStream::new(rx, tx);
+
+                tokio::io::copy_bidirectional(&mut stream, &mut local).await?;
+
+                // let mut proxy = local.into_daemon_store_adapter(stream).await?;
+                // match proxy.run().await {
+                //     Ok(()) => continue,
+                //     Err(ref err @ nix_daemon::Error::IO(ref io))
+                //         if io.kind() == io::ErrorKind::NotConnected =>
+                //     {
+                //         dbg!(err);
+                //         continue;
+                //     }
+                //     Err(err) => Err(err)?,
+                // }
             }
         }
         Mode::Client { server_address } => {
             let stream = tokio::net::UnixSocket::new_stream()?;
             stream.bind("./proxy.sock")?;
-            let listener = stream.listen(128)?;
+            let listener = stream.listen(1)?;
 
-            let client = connect_to_remote(server_address.node_addr().clone()).await?;
-            let mut proxy = Sending::new(client);
+            // let mut proxy = Sending::new(client);
 
             loop {
                 let (mut socket, _) = listener.accept().await?;
                 let (rx, tx) = socket.split();
-                let mut proxy = proxy
-                    .into_daemon_store_adapter(DuplexP2PStream(rx, tx))
-                    .await?;
-                proxy.run().await?;
+                let mut socket = DuplexP2PStream::new(rx, tx);
+
+                let mut client = connect_to_remote(server_address.node_addr().clone()).await?;
+                let result = tokio::io::copy_bidirectional(&mut socket, &mut client).await;
+
+                dbg!(&result);
+
+                if let Err(err) = result.context("oops") {
+                    println!("{:#?}", err);
+                }
+
+                // let (rx, tx) = socket.split();
+                // let mut proxy = proxy
+                //     .into_daemon_store_adapter(DuplexP2PStream(rx, tx))
+                //     .await?;
+                // proxy.run().await?;
             }
         }
     };
@@ -108,7 +126,15 @@ where
         self: std::pin::Pin<&mut Self>,
         cx: &mut std::task::Context<'_>,
     ) -> std::task::Poll<std::result::Result<(), std::io::Error>> {
-        AsyncWrite::poll_shutdown(Pin::new(&mut self.get_mut().1), cx)
+        AsyncWrite::poll_shutdown(Pin::new(&mut self.get_mut().1), cx).map(|result| {
+            if let Err(ref err) = result
+                && err.kind() == tokio::io::ErrorKind::NotConnected
+            {
+                Ok(())
+            } else {
+                dbg!(result)
+            }
+        })
     }
 }
 
@@ -126,9 +152,7 @@ where
     }
 }
 
-async fn connect_to_remote(
-    addr: NodeAddr,
-) -> Result<DaemonStore<DuplexP2PStream<RecvStream, SendStream>>> {
+async fn connect_to_remote(addr: NodeAddr) -> Result<DuplexP2PStream<RecvStream, SendStream>> {
     let ep = Endpoint::builder()
         // .secret_key(SecretKey::from_bytes(&[
         //     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
@@ -140,12 +164,12 @@ async fn connect_to_remote(
     let (tx, rx) = conn.open_bi().await.context("unable to open uni")?;
     let stream = DuplexP2PStream::new(rx, tx);
 
-    let conn = DaemonStore::builder()
-        .init(stream)
-        .await
-        .context("unable to connect to daemon")?;
+    // let conn = DaemonStore::builder()
+    //     .init(stream)
+    //     .await
+    //     .context("unable to connect to daemon")?;
 
-    Ok(conn)
+    Ok(stream)
 }
 
 async fn serve_to_remote() -> Result<Endpoint> {
@@ -163,10 +187,11 @@ async fn serve_to_remote() -> Result<Endpoint> {
     let node = ep.node_addr().initialized().await?;
     let mut short = node.clone();
     let ticket = NodeTicket::new(node);
-    // short.direct_addresses.clear();
-    // let short = NodeTicket::new(short);
+    short.direct_addresses.clear();
+    let short = NodeTicket::new(short);
 
     println!("address is {ticket}");
+    println!("short address is {short}");
 
     Ok(ep)
 }
