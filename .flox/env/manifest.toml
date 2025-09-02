@@ -17,10 +17,12 @@ version = 1
 [install]
 rustc.pkg-path = "rustc"
 cargo.pkg-path = "cargo"
+rust-lib-src.pkg-path = "rustPlatform.rustLibSrc"
 clippy.pkg-path = "clippy"
 jujutsu.pkg-path = "jujutsu"
 libiconv.pkg-path = "libiconv"
 gcc.pkg-path = "gcc"
+rustfmt.pkg-path = "rustfmt"
 # gum.pkg-path = "gum"
 # gum.version = "^0.14.5"
 
