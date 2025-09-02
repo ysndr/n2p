@@ -1,19 +1,21 @@
-use std::{fmt::Debug, pin::Pin};
+use std::{
+    fmt::Debug,
+    path::{Path, PathBuf},
+    pin::Pin,
+};
 
 use anyhow::{Context, Result};
 use clap::Parser;
 use iroh::{
-    Endpoint, NodeAddr, PublicKey, SecretKey, Watcher,
+    Endpoint, NodeAddr, SecretKey, Watcher,
     endpoint::{RecvStream, SendStream},
 };
 use iroh_base::ticket::NodeTicket;
-use nix_daemon::{
-    Store,
-    nix::{DaemonProtocolAdapter, DaemonStore},
-};
+
 use tokio::{
-    io::{self, AsyncRead, AsyncReadExt, AsyncWrite, AsyncWriteExt},
-    net::{UnixSocket, UnixStream},
+    io::{AsyncRead, AsyncWrite},
+    net::UnixSocket,
+    select,
 };
 
 #[derive(Debug, clap::Parser)]
@@ -51,27 +53,68 @@ async fn main() -> Result<()> {
         }
         Mode::Client { server_address } => {
             let stream = tokio::net::UnixSocket::new_stream()?;
-            stream.bind("./proxy.sock")?;
+            let socket_file_guard = SelfCleaningSocketFile::bind_socket(
+                &stream,
+                std::env::current_dir()?.join(format!(
+                    "{}.sock",
+                    server_address
+                        .node_addr()
+                        .node_id
+                        .to_string()
+                        .chars()
+                        .take(12)
+                        .collect::<String>()
+                )),
+            )?;
             let listener = stream.listen(1)?;
 
-            // let mut proxy = Sending::new(client);
+            println!("unix:{}", socket_file_guard.as_ref().display());
 
             loop {
-                let (mut socket, _) = listener.accept().await?;
-                let (rx, tx) = socket.split();
-                let mut socket = DuplexP2PStream::new(rx, tx);
+                let body = async || -> Result<()> {
+                    let (mut socket, _) = listener.accept().await?;
+                    let (rx, tx) = socket.split();
+                    let mut socket = DuplexP2PStream::new(rx, tx);
 
-                let mut client = connect_to_remote(server_address.node_addr().clone()).await?;
-                let result = tokio::io::copy_bidirectional(&mut socket, &mut client).await;
+                    let mut client = connect_to_remote(server_address.node_addr().clone()).await?;
+                    let result = tokio::io::copy_bidirectional(&mut socket, &mut client).await;
 
-                dbg!(&result);
+                    if let Err(err) = result.context("oops") {
+                        eprintln!("err: {err:#?}");
+                    }
+                    Ok(())
+                };
 
-                if let Err(err) = result.context("oops") {
-                    println!("{:#?}", err);
+                select! {
+                    _ = tokio::signal::ctrl_c() => break,
+                    result = body() => result?,
                 }
             }
         }
     };
+    Ok(())
+}
+
+struct SelfCleaningSocketFile(PathBuf);
+impl SelfCleaningSocketFile {
+    pub fn bind_socket(socket: &UnixSocket, path: impl AsRef<Path>) -> Result<Self> {
+        let path = path.as_ref().to_path_buf();
+        socket.bind(&path)?;
+        Ok(Self(path))
+    }
+}
+
+impl AsRef<Path> for SelfCleaningSocketFile {
+    fn as_ref(&self) -> &Path {
+        &self.0
+    }
+}
+
+impl Drop for SelfCleaningSocketFile {
+    fn drop(&mut self) {
+        let _err = std::fs::remove_file(&self.0)
+            .inspect_err(|err| eprintln!("warn: failed removing socket file: {err}"));
+    }
 }
 
 struct DuplexP2PStream<R, W>(R, W);
@@ -134,8 +177,7 @@ where
 async fn connect_to_remote(addr: NodeAddr) -> Result<DuplexP2PStream<RecvStream, SendStream>> {
     let ep = Endpoint::builder()
         // .secret_key(SecretKey::from_bytes(&[
-        //     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-        // 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+        //     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
         //     1, 1, 1,
         // ]))
         .bind()
@@ -169,71 +211,4 @@ async fn serve_to_remote() -> Result<Endpoint> {
     println!("short address is {short}");
 
     Ok(ep)
-}
-
-async fn connect_to_local_daemon() -> Result<DaemonStore<UnixStream>> {
-    let conn = DaemonStore::builder()
-        .connect_unix("/nix/var/nix/daemon-socket/socket")
-        .await?;
-    Ok(conn)
-}
-
-struct Receiving<C>
-where
-    C: AsyncWriteExt + AsyncReadExt + Unpin + Send,
-{
-    local: DaemonStore<C>,
-}
-
-impl<C> Receiving<C>
-where
-    C: AsyncWriteExt + AsyncReadExt + Unpin + Send,
-{
-    fn new(local: DaemonStore<C>) -> Self {
-        Self { local }
-    }
-
-    async fn into_daemon_store_adapter<R, W>(
-        &mut self,
-        listener: DuplexP2PStream<R, W>,
-    ) -> Result<DaemonProtocolAdapter<DaemonStore<C>, R, W>>
-    where
-        R: AsyncRead + Send + Unpin + Debug,
-        W: AsyncWrite + Send + Unpin + Debug,
-    {
-        DaemonProtocolAdapter::builder(&mut self.local)
-            .adopt(listener.0, listener.1)
-            .await
-            .context("unable to adopt listener")
-    }
-}
-
-struct Sending<R>
-where
-    R: AsyncWriteExt + AsyncReadExt + Unpin + Send,
-{
-    remote: DaemonStore<R>,
-}
-
-impl<R> Sending<R>
-where
-    R: AsyncWriteExt + AsyncReadExt + Unpin + Send,
-{
-    fn new(remote: DaemonStore<R>) -> Self {
-        Self { remote }
-    }
-
-    async fn into_daemon_store_adapter<CR, CW>(
-        &mut self,
-        listener: DuplexP2PStream<CR, CW>,
-    ) -> Result<DaemonProtocolAdapter<DaemonStore<R>, CR, CW>>
-    where
-        CR: AsyncRead + Send + Unpin + Debug,
-        CW: AsyncWrite + Send + Unpin + Debug,
-    {
-        DaemonProtocolAdapter::builder(&mut self.remote)
-            .adopt(listener.0, listener.1)
-            .await
-            .context("unable to adopt listener")
-    }
 }
