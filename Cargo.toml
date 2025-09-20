@@ -1,5 +1,7 @@
 [package]
 name = "n2p"
+description = "Share your daemons with your peers"
+homepage = "https://github.com/ysndr/n2p"
 version = "0.1.0"
 edition = "2024"
 
