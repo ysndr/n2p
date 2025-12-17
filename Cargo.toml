@@ -13,3 +13,5 @@ tokio = "1"
 anyhow = "1"
 tracing = "0.1.41"
 tracing-subscriber = { version = "0.3.20", features = ["env-filter"] }
+rand = "0.8"
+xdg = "3.0.0"

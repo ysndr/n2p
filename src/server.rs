@@ -10,14 +10,11 @@ pub struct Server {
 
 impl Server {
     #[tracing::instrument]
-    pub async fn new() -> Result<Self> {
+    pub async fn new(secret_key: SecretKey) -> Result<Self> {
         let endpoint = Endpoint::builder()
             .alpns(["nix-daemon".into()].to_vec())
             .relay_mode(iroh::RelayMode::Default)
-            .secret_key(SecretKey::from_bytes(&[
-                1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-                1, 1, 1, 1,
-            ]))
+            .secret_key(secret_key)
             .bind()
             .await?;
         endpoint.home_relay().initialized().await?;
