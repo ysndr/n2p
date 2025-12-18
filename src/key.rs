@@ -1,4 +1,4 @@
-use std::{path::Path, sync::LazyLock};
+use std::path::Path;
 
 use anyhow::{Context, Result, anyhow};
 use iroh::SecretKey;
@@ -8,9 +8,8 @@ use tokio::{
 };
 
 use tracing::info;
-use xdg::BaseDirectories;
 
-static DIRS: LazyLock<BaseDirectories> = LazyLock::new(|| BaseDirectories::with_prefix("n2p"));
+use crate::DIRS;
 
 pub fn generate_secret_key() -> SecretKey {
     SecretKey::generate(&mut rand::rngs::OsRng)

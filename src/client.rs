@@ -1,4 +1,7 @@
-use std::path::{Path, PathBuf};
+use std::{
+    env::temp_dir,
+    path::{Path, PathBuf},
+};
 
 use anyhow::{Context, Result};
 
@@ -39,10 +42,8 @@ pub fn start_listener(
     server_address: &NodeTicket,
 ) -> Result<(SelfCleaningSocketFile, tokio::net::UnixListener)> {
     let stream = tokio::net::UnixSocket::new_stream()?;
-    let socket_file_guard = SelfCleaningSocketFile::bind_socket(
-        &stream,
-        std::env::current_dir()?.join(SocketFileName::from(server_address)),
-    )?;
+    let socket_file_guard =
+        SelfCleaningSocketFile::bind_socket(&stream, SocketFileName::from(server_address))?;
     let listener = stream.listen(1)?;
     Ok((socket_file_guard, listener))
 }
@@ -58,7 +59,7 @@ pub async fn proxy_incoming_stream_to_remote(
     Ok(())
 }
 
-struct SocketFileName(String);
+pub struct SocketFileName(String);
 impl From<&NodeTicket> for SocketFileName {
     fn from(server_address: &NodeTicket) -> Self {
         Self(format!(
@@ -73,17 +74,11 @@ impl From<&NodeTicket> for SocketFileName {
         ))
     }
 }
-impl AsRef<Path> for SocketFileName {
-    fn as_ref(&self) -> &Path {
-        let SocketFileName(name) = self;
-        Path::new(name)
-    }
-}
 
 pub struct SelfCleaningSocketFile(PathBuf);
 impl SelfCleaningSocketFile {
-    pub fn bind_socket(socket: &UnixSocket, path: impl AsRef<Path>) -> Result<Self> {
-        let path = path.as_ref().to_path_buf();
+    pub fn bind_socket(socket: &UnixSocket, name: SocketFileName) -> Result<Self> {
+        let path = temp_dir().join(name.0);
         socket.bind(&path)?;
         Ok(Self(path))
     }
