@@ -9,15 +9,31 @@ or excessive setup.
 
 ## USAGE
 
-### `n2p server`
+### `n2p server [OPTIONS]`
 
 Starts a local node that forwards connections to the local nix daemon socket.
 Logs "short" and "long" addresses to stderr, that can be used to connect a client.
 
-### `n2p client <address>`
+#### Options:
+
+      --secret-key-file <SECRET_KEY_FILE>
+          secret key identifying this node if omitted will create a random token and store it in XDG_STATE_DIR/n2p
+      --one-time-key
+          run the server with a non persistent address
+      --timeout <TIMEOUT>
+          shutdown after <TIMEOUT> seconds of no connection
+
+### `n2p client [OPTIONS] <SERVER_ADDRESS>`
 
 Sets up a local unix socket that can be used by nix in the url position of arguments
 that take store urls (e.g. `nix copy --to <url>`).
+
+#### Arguments:
+
+    <SERVER_ADDRESS>  address of the server node printed on startup
+
+#### Options:
+      --timeout <TIMEOUT>  shutdown after <TIMEOUT> seconds of no connection
 
 #### Example
 
