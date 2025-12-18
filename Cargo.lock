@@ -1862,15 +1862,17 @@ dependencies = [
 
 [[package]]
 name = "n2p"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "anyhow",
  "clap",
  "iroh",
  "iroh-base",
+ "rand 0.8.5",
  "tokio",
  "tracing",
  "tracing-subscriber",
+ "xdg",
 ]
 
 [[package]]
@@ -4246,6 +4248,12 @@ dependencies = [
  "wasm-bindgen-futures",
  "web-sys",
 ]
+
+[[package]]
+name = "xdg"
+version = "3.0.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "2fb433233f2df9344722454bc7e96465c9d03bff9d77c248f9e7523fe79585b5"
 
 [[package]]
 name = "xml-rs"
